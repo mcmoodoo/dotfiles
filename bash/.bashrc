@@ -32,5 +32,5 @@ source ~/.api_keys
 source ~/.config/gopass/completions
 
 # ENV
-export HYPRSHOT_DIR="~/Pictures"
+export HYPRSHOT_DIR="/home/mcmoodoo/Pictures"
 export XDG_PICTURES_DIR="/home/mcmoodoo/Pictures"
