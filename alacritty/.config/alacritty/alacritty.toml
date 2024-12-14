@@ -11,7 +11,7 @@ blur = true
 normal = { family = "HackNerdFont", style = "Regular" }  # Replace with your preferred Nerd Font
 bold = { family = "HackNerdFont", style = "Bold" }
 italic = { family = "HackNerdFont", style = "Italic" }
-size = 14.0  # Font size
+size = 12.0  # Font size
 
 [colors.primary]
 background = "0x2E3440"  # Dark background
