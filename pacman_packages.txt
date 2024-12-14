@@ -1,5 +1,3 @@
-# A list of installed packages extracted with `pacman -Qqe`
-
 acpi
 alacritty
 alsa-utils
@@ -13,6 +11,7 @@ bluez-utils
 brightnessctl
 catppuccin-gtk-theme-mocha
 chafa
+chromium
 clang
 cool-retro-term
 dhcpcd
@@ -44,9 +43,11 @@ lcov
 libnewt
 linux
 linux-firmware
+ly
 man-db
 neofetch
 neovim
+net-tools
 nwg-look
 obsidian
 ollama
