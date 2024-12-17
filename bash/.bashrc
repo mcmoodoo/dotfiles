@@ -30,6 +30,7 @@ source ~/.foundry/forge_completions
 source ~/.config/gitleaks/completions
 source ~/.api_keys
 source ~/.config/gopass/completions
+source ~/.env
 
 # ENV
 export HYPRSHOT_DIR="/home/mcmoodoo/Pictures"
