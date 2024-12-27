@@ -22,6 +22,9 @@ export PATH="$PATH:/home/mcmoodoo/.config/.foundry/bin"
 export PATH="$PATH:/home/mcmoodoo/.local/bin"
 alias ollama_start='systemctl start ollama'
 alias ollama_stop='systemctl stop ollama'
+alias get_nitro_container_ip='~/repos/nitro-devnode/get_running_nitro_node_container_ip.sh'
+alias set_env_for_nitro_container_ip='export NITRO_DOCKER_IP=$(get_nitro_container_ip)'
+alias docker_start='sudo systemctl start docker.service'
 
 # Completions
 source ~/.foundry/anvil_completions
@@ -35,3 +38,5 @@ source ~/.env
 # ENV
 export HYPRSHOT_DIR="/home/mcmoodoo/Pictures"
 export XDG_PICTURES_DIR="/home/mcmoodoo/Pictures"
+
+set -o vi
