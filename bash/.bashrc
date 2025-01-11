@@ -12,6 +12,8 @@ PS1='[\u@\h \W]\$ '
 
 eval "$(starship init bash)"
 . "$HOME/.cargo/env"
+. "$HOME/.asdf/asdf.sh"
+. "$HOME/.asdf/completions/asdf.bash"
 
 export NVM_DIR="$HOME/.config/nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -40,3 +42,7 @@ export HYPRSHOT_DIR="/home/mcmoodoo/Pictures"
 export XDG_PICTURES_DIR="/home/mcmoodoo/Pictures"
 
 set -o vi
+
+. "/home/mcmoodoo/.config/.starkli/env"
+
+export PATH="$PATH:/home/mcmoodoo/.local/bin"
