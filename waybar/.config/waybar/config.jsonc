@@ -8,6 +8,8 @@
     "modules-right": [
         "battery",
         "custom/separator",
+        "custom/energy-rate",
+        "custom/separator",
         "tray",
         "custom/separator",
         "pulseaudio",
@@ -131,6 +133,11 @@
       "tooltip-format": "MPD (connected)",
       "tooltip-format-disconnected": "MPD (disconnected)",
       "max-length": 45
+    },
+
+    "custom/energy-rate": {
+        "interval": 1,
+        "exec": "upower -e | rg BAT1 | xargs upower -i | rg energy-rate | awk '{print $2, $3}'",
     },
 
     "custom/recorder": {

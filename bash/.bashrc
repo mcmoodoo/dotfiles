@@ -36,6 +36,7 @@ source ~/.config/gitleaks/completions
 source ~/.api_keys
 source ~/.config/gopass/completions
 source ~/.env
+source ~/.completions/*
 
 # ENV
 export HYPRSHOT_DIR="/home/mcmoodoo/Pictures"
@@ -46,3 +47,4 @@ set -o vi
 . "/home/mcmoodoo/.config/.starkli/env"
 
 export PATH="$PATH:/home/mcmoodoo/.local/bin"
+export PATH="$PATH:/home/mcmoodoo/.bin"
