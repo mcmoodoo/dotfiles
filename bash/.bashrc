@@ -11,6 +11,18 @@ alias ll='eza -al'
 alias grep='grep --color=auto'
 PS1='[\u@\h \W]\$ '
 
+alias fzf_search='fzf --preview "bat --style=numbers --color=always --line-range :100 {}"'
+
+# bash-completion
+[[ $PS1 && -f /usr/share/bash-completion/bash_completion ]] && . /usr/share/bash-completion/bash_completion
+source /usr/share/fzf/completion.bash
+source /usr/share/fzf/key-bindings.bash
+
+# powerline
+if [ -f /usr/share/powerline/bindings/bash/powerline.sh ]; then
+   source /usr/share/powerline/bindings/bash/powerline.sh
+fi
+
 eval "$(starship init bash)"
 . "$HOME/.cargo/env"
 . "$HOME/.asdf/asdf.sh"
@@ -45,6 +57,7 @@ source ~/.completions/restish-completions
 source ~/.completions/pnpm-completions
 source ~/.completions/bun-completions
 source ~/.completions/zellij-completions
+source ~/.completions/sqlx-completions
 
 # ENV
 export HYPRSHOT_DIR="/home/mcmoodoo/Pictures"
@@ -63,3 +76,9 @@ export PATH="$PATH:/home/mcmoodoo/.bin/byn"
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
+complete -C "$(which aws_completer)" aws
+
+
+source /home/mcmoodoo/.config/broot/launcher/bash/br
+
+export PATH="$PATH:/home/mcmoodoo/.foundry/bin"
