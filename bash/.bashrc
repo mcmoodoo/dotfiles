@@ -82,3 +82,5 @@ complete -C "$(which aws_completer)" aws
 source /home/mcmoodoo/.config/broot/launcher/bash/br
 
 export PATH="$PATH:/home/mcmoodoo/.foundry/bin"
+alias z="zellij"
+alias tf="terraform"
