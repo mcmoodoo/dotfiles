@@ -20,7 +20,7 @@ source /usr/share/fzf/key-bindings.bash
 
 # powerline
 if [ -f /usr/share/powerline/bindings/bash/powerline.sh ]; then
-   source /usr/share/powerline/bindings/bash/powerline.sh
+    source /usr/share/powerline/bindings/bash/powerline.sh
 fi
 
 eval "$(starship init bash)"
@@ -29,11 +29,11 @@ eval "$(starship init bash)"
 . "$HOME/.asdf/completions/asdf.bash"
 
 export NVM_DIR="$HOME/.config/nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
 alias lg='lazygit'
 
-export PATH="$PATH:/home/mcmoodoo/.config/.foundry/bin"
+export PATH="$PATH:/home/mcmoodoo/.foundry/bin"
 export PATH="$PATH:/home/mcmoodoo/.local/bin"
 export PATH="$PATH:/home/mcmoodoo/go/bin"
 alias ollama_start='systemctl start ollama'
@@ -78,9 +78,7 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 
 complete -C "$(which aws_completer)" aws
 
-
 source /home/mcmoodoo/.config/broot/launcher/bash/br
 
-export PATH="$PATH:/home/mcmoodoo/.foundry/bin"
 alias z="zellij"
 alias tf="terraform"
