@@ -109,5 +109,23 @@ return {
         prompt_title = 'Live Grep in Open Files',
       }
     end, { desc = '[S]earch [/] in Open Files' })
+
+    -- Unrestricted search bindings (no ignore patterns)
+    vim.keymap.set('n', '<leader>sF', function()
+      builtin.find_files {
+        no_ignore = true,
+        hidden = true,
+        file_ignore_patterns = {},
+        prompt_title = 'Find All Files (No Restrictions)',
+      }
+    end, { desc = '[S]earch All [F]iles (unrestricted)' })
+
+    vim.keymap.set('n', '<leader>sG', function()
+      builtin.live_grep {
+        additional_args = { '--no-ignore', '--hidden' },
+        file_ignore_patterns = {},
+        prompt_title = 'Live Grep All Files (No Restrictions)',
+      }
+    end, { desc = '[S]earch All by [G]rep (unrestricted)' })
   end,
 }
