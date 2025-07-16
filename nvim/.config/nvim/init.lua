@@ -30,6 +30,7 @@ require('lazy').setup {
   require 'plugins.misc',
   require 'plugins.comment',
   require 'plugins.toggleterm',
+  require 'plugins.spectre',
 }
 
 -- The line beneath this is called `modeline`. See `:help modeline`
