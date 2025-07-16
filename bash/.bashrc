@@ -4,7 +4,7 @@
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
-
+#
 alias ls='ls --color=auto'
 alias l='eza -l'
 alias ll='eza -al'
@@ -28,9 +28,6 @@ eval "$(starship init bash)"
 . "$HOME/.asdf/asdf.sh"
 . "$HOME/.asdf/completions/asdf.bash"
 
-export NVM_DIR="$HOME/.config/nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
 alias lg='lazygit'
 
 export PATH="$PATH:/home/mcmoodoo/.foundry/bin"
