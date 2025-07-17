@@ -33,6 +33,7 @@ alias lg='lazygit'
 export PATH="$PATH:/home/mcmoodoo/.foundry/bin"
 export PATH="$PATH:/home/mcmoodoo/.local/bin"
 export PATH="$PATH:/home/mcmoodoo/go/bin"
+export PATH="$PATH:/home/mcmoodoo/.volta/bin"
 alias ollama_start='systemctl start ollama'
 alias ollama_stop='systemctl stop ollama'
 alias get_nitro_container_ip='~/repos/nitro-devnode/get_running_nitro_node_container_ip.sh'
@@ -55,6 +56,7 @@ source ~/.completions/pnpm-completions
 source ~/.completions/bun-completions
 source ~/.completions/zellij-completions
 source ~/.completions/sqlx-completions
+source ~/.completions/volta-completions
 
 # ENV
 export HYPRSHOT_DIR="/home/mcmoodoo/Pictures"
