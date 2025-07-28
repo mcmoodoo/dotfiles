@@ -57,6 +57,7 @@ source ~/.completions/bun-completions
 source ~/.completions/zellij-completions
 source ~/.completions/sqlx-completions
 source ~/.completions/volta-completions
+source ~/.completions/just-completions
 
 # ENV
 export HYPRSHOT_DIR="/home/mcmoodoo/Pictures"
@@ -81,3 +82,5 @@ source /home/mcmoodoo/.config/broot/launcher/bash/br
 
 alias z="zellij"
 alias tf="terraform"
+
+alias find_repos_with_remotes='~/.my-scripts/scan_repos_with_remotes.py'
