@@ -34,11 +34,6 @@ export PATH="$PATH:/home/mcmoodoo/.foundry/bin"
 export PATH="$PATH:/home/mcmoodoo/.local/bin"
 export PATH="$PATH:/home/mcmoodoo/go/bin"
 export PATH="$PATH:/home/mcmoodoo/.volta/bin"
-alias ollama_start='systemctl start ollama'
-alias ollama_stop='systemctl stop ollama'
-alias get_nitro_container_ip='~/repos/nitro-devnode/get_running_nitro_node_container_ip.sh'
-alias set_env_for_nitro_container_ip='export NITRO_DOCKER_IP=$(get_nitro_container_ip)'
-alias docker_start='systemctl start docker.service'
 alias fix_airpods='systemctl --user restart pipewire pipewire-pulse.service wireplumber.service'
 alias wrapped_shell='bwrap --ro-bind /usr /usr --ro-bind /bin /bin --ro-bind /lib /lib --ro-bind /lib64 /lib64 --dev /dev --proc /proc --tmpfs /tmp /bin/bash'
 
@@ -58,6 +53,7 @@ source ~/.completions/zellij-completions
 source ~/.completions/sqlx-completions
 source ~/.completions/volta-completions
 source ~/.completions/just-completions
+source ~/.completions/runpod-completions
 
 # ENV
 export HYPRSHOT_DIR="/home/mcmoodoo/Pictures"
@@ -84,3 +80,4 @@ alias z="zellij"
 alias tf="terraform"
 
 alias find_repos_with_remotes='~/.my-scripts/scan_repos_with_remotes.py'
+alias fix_touchpod='sudo modprobe -r i2c_hid_acpi && sudo modprobe i2c_hid_acpi'
