@@ -25,8 +25,6 @@ fi
 
 eval "$(starship init bash)"
 . "$HOME/.cargo/env"
-. "$HOME/.asdf/asdf.sh"
-. "$HOME/.asdf/completions/asdf.bash"
 
 alias lg='lazygit'
 
@@ -61,12 +59,9 @@ export XDG_PICTURES_DIR="/home/mcmoodoo/Pictures"
 
 set -o vi
 
-. "/home/mcmoodoo/.config/.starkli/env"
-
 export PATH="$PATH:/home/mcmoodoo/.local/bin"
 export PATH="$PATH:/home/mcmoodoo/.bin"
 export PATH="$PATH:/home/mcmoodoo/.bin/byn"
-. "/home/mcmoodoo/.deno/env"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
