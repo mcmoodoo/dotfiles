@@ -28,8 +28,10 @@ return {
       formatting.stylua,
       formatting.shfmt.with { args = { '-i', '4' } },
       formatting.terraform_fmt,
-      require('none-ls.formatting.ruff').with { extra_args = { '--extend-select', 'I' } },
-      require 'none-ls.formatting.ruff_format',
+      -- Only use ruff_format for Python formatting
+      require('none-ls.formatting.ruff_format').with {
+        extra_args = { '--extend-select', 'I' },
+      },
     }
 
     local augroup = vim.api.nvim_create_augroup('LspFormatting', {})
@@ -44,7 +46,18 @@ return {
             group = augroup,
             buffer = bufnr,
             callback = function()
-              vim.lsp.buf.format { async = false }
+              -- Format with specific client filtering
+              vim.lsp.buf.format {
+                async = false,
+                filter = function(format_client)
+                  -- For Python files, only use none-ls (which uses ruff_format)
+                  if vim.bo.filetype == 'python' then
+                    return format_client.name == 'null-ls'
+                  end
+                  -- For other files, use any available formatter
+                  return true
+                end,
+              }
             end,
           })
         end

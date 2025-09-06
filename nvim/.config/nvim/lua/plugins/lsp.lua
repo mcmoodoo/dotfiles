@@ -163,11 +163,25 @@ return {
       --
       -- But for many setups, the LSP (`tsserver`) will work just fine
       ts_ls = {}, -- tsserver is deprecated
-      ruff = {},
+      ruff = {
+        init_options = {
+          settings = {
+            -- Ruff language server settings
+            organizeImports = true,
+          },
+        },
+        -- Disable ruff-lsp's formatting capability to prevent conflicts
+        on_attach = function(client, bufnr)
+          -- Preserve all other capabilities, only disable formatting
+          client.server_capabilities.documentFormattingProvider = false
+          client.server_capabilities.documentRangeFormattingProvider = false
+        end,
+      },
       pylsp = {
         settings = {
           pylsp = {
             plugins = {
+              -- Disable all formatting/linting plugins in pylsp
               pyflakes = { enabled = false },
               pycodestyle = { enabled = false },
               autopep8 = { enabled = false },
@@ -176,9 +190,15 @@ return {
               pylsp_mypy = { enabled = false },
               pylsp_black = { enabled = false },
               pylsp_isort = { enabled = false },
+              ruff = { enabled = false }, -- Also disable ruff plugin if present
             },
           },
         },
+        on_attach = function(client, bufnr)
+          -- Disable pylsp formatting capabilities
+          client.server_capabilities.documentFormattingProvider = false
+          client.server_capabilities.documentRangeFormattingProvider = false
+        end,
       },
       html = { filetypes = { 'html', 'twig', 'hbs' } },
       cssls = {},
@@ -249,7 +269,13 @@ return {
           -- by the server configuration above. Useful when disabling
           -- certain features of an LSP (for example, turning off formatting for tsserver)
           server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-          require('lspconfig')[server_name].setup(server)
+          
+          -- Preserve custom on_attach if defined
+          local config = vim.tbl_deep_extend('force', server, {
+            capabilities = server.capabilities,
+          })
+          
+          require('lspconfig')[server_name].setup(config)
         end,
       },
     }
