@@ -36,13 +36,12 @@ alias fix_airpods='systemctl --user restart pipewire pipewire-pulse.service wire
 alias wrapped_shell='bwrap --ro-bind /usr /usr --ro-bind /bin /bin --ro-bind /lib /lib --ro-bind /lib64 /lib64 --dev /dev --proc /proc --tmpfs /tmp /bin/bash'
 
 # Completions
-source ~/.foundry/anvil_completions
-source ~/.foundry/cast_completions
-source ~/.foundry/forge_completions
-source ~/.config/gitleaks/completions
-source ~/.config/gopass/completions
 source ~/.env
 source ~/.completions/*
+source ~/.completions/anvil_completions
+source ~/.completions/cast_completions
+source ~/.completions/forge_completions
+source ~/.completions/gitleaks_completions
 source ~/.completions/restish-completions
 source ~/.completions/pnpm-completions
 source ~/.completions/bun-completions
