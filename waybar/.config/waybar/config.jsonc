@@ -1,161 +1,163 @@
 {
-    "layer": "top",
-    "position": "top",
-    "height": 33,
-    "margin": "3, 0, 2, 0",
-    "modules-left": ["hyprland/workspaces","cpu","custom/separator","memory","custom/separator","network", "custom/recorder", "custom/audiorec"],
-    "modules-center": ["hyprland/windows"],
-    "modules-right": [
-        "battery",
-        "custom/separator",
-        "custom/energy-rate",
-        "custom/separator",
-        "tray",
-        "custom/separator",
-        "pulseaudio",
-        "custom/separator",
-        "clock"],
+  "layer": "top",
+  "position": "top",
+  "height": 36,
+  "margin": "6, 10, 0, 10",
 
-    "custom/language": {
-        "exec": "swaymsg --type get_inputs | grep \"xkb_active_layout_name\" | sed -u '1!d; s/^.*xkb_active_layout_name\": \"//; s/ (US)//; s/\",//' && swaymsg --type subscribe --monitor '[\"input\"]' | sed -u 's/^.*xkb_active_layout_name\": \"//; s/\",.*$//; s/ (US)//'"
-    },
-    "custom/separator": {
-        "format": "|",
-        "interval": "once",
-        "tooltip": false
-    },
-    "sway/mode": {
-        "format": "<span style=\"italic\">{}</span>"
-    },
-    "idle_inhibitor": {
-        "format": "{icon}",
-        "format-icons": {
-            "activated": "",
-            "deactivated": ""
-        }
-    },
-    "tray": {
-        "icon-size": 12,
-        "spacing": 6
-    },
-    "clock": {
-        "interval": 1,
-        "locale": "C", 
-        "format": " {:%I:%M %p}",
-        "format-alt": " {:%a,%b %d}"
-    },
-    "cpu": {
-        "format": "&#8239;{usage}%",
-        "tooltip": false,
-        "on-click": "alacritty -e 'btm'"
-    },
-    "memory": {
-        "interval": 30,
-        "format": " {used:0.2f}GB",
-        "on-click": "alacritty -e 'btm'",
-        "max-length": 10,
-        "tooltip": false,
-        "warning": 70,
-        "critical": 90
-    },
+  "modules-left": [
+    "cpu",
+    "custom/separator",
+    "memory",
+    "custom/separator",
+    "network"
+  ],
 
-    "backlight": {
-        "format": "{icon}&#8239;{percent}%",
-        "format-icons": ["💡", "💡"],
-        "on-scroll-down": "brightnessctl -c backlight set 1%-",
-        "on-scroll-up": "brightnessctl -c backlight set +1%"
-    },
-    "battery": {
-        "states": {
-            "good": 95,
-            "warning": 30,
-            "critical": 15
-        },
-        "format": "{icon}&#8239;{capacity}%",
-        "format-charging": "&#8239;{capacity}%",
-        "format-plugged": "&#8239;{capacity}%",
-        "format-alt": "{icon} {time}",
-        // "format-good": "", // An empty format will hide the module
-        // "format-full": "",
-        "format-icons": ["", "", "", "", ""]
-        // "format-icons": ["", "", "", "", ""]
-    },
-    "network": {
-        // "interface": "wlp2*", // (Optional) To force the use of this interface
-        "format-wifi": "&#8239;({signalStrength}%)",
-        "format-ethernet": "&#8239;{ifname}: {ipaddr}/{cidr}",
-        "format-linked": "&#8239;{ifname} (No IP)",
-        "format-disconnected": "✈&#8239;Disconnected",
-        "format-alt": "{ifname}: {ipaddr}/{cidr}",
-        "tooltip-format": "{essid}: {ipaddr}"
-    },
-    "pulseaudio": {
-      // "scroll-step": 1, // %, can be a float
-      "format": "{icon} {volume}% {format_source}",
-      "format-bluetooth": "{icon} {volume}% {format_source}",
-      "format-bluetooth-muted": " {format_source}",
-      "format-muted": "  {format_source}",
-      "format-source": " {volume}%",
-      "format-source-muted": "",
-      "format-icons": {
-        "headphone": "",
-        "hands-free": "",
-        "headset": "🎧",
-        "phone": "",
-        "portable": "",
-        "car": "",
-        "default": ["", "", ""]
-      },
-      "on-click": "pavucontrol"
-    },
-    "mpd": {
-      "format": "{stateIcon} {artist} - {title}",
-      "format-disconnected": "🎶",
-      "format-stopped": "♪",
-      "interval": 10,
-      "consume-icons": {
-        "on": " " // Icon shows only when "consume" is on
-      },
-      "random-icons": {
-        "off": "<span color=\"#f53c3c\"></span> ", // Icon grayed out when "random" is off
-        "on": " "
-      },
-      "repeat-icons": {
-        "on": " "
-      },
-      "single-icons": {
-        "on": "1 "
-      },
-      "state-icons": {
-        "paused": "",
-        "playing": ""
-      },
-      "tooltip-format": "MPD (connected)",
-      "tooltip-format-disconnected": "MPD (disconnected)",
-      "max-length": 45
-    },
+  "modules-center": [
+    "hyprland/workspaces"
+  ],
 
-    "custom/energy-rate": {
-        "interval": 1,
-        "exec": "upower -e | rg BAT1 | xargs upower -i | rg energy-rate | awk '{print $2, $3}'",
-    },
+  "modules-right": [
+    "hyprland/windows",
+    "custom/separator",
+    "group/recording",
+    "custom/separator",
+    "pulseaudio",
+    "custom/separator",
+    "backlight",
+    "custom/separator",
+    "battery",
+    "custom/separator",
+    "custom/energy-rate",
+    "custom/separator",
+    "clock",
+    "custom/separator",
+    "tray"
+  ],
 
-    "custom/recorder": {
-        "format": " Rec",
-        "format-disabled": " Off-air", //An empty format will hide the module.
-        "return-type": "json",
-        "interval": 1,
-        "exec": "echo '{\"class\": \"recording\"}'",
-        "exec-if": "pgrep wf-recorder",
-    },
+  "group/recording": {
+    "orientation": "horizontal",
+    "modules": ["custom/recorder", "custom/audiorec"]
+  },
 
-    "custom/audiorec": {
-        "format": "♬ Rec",
-        "format-disabled": "♬ Off-air", //An empty format will hide the module.
-        "return-type": "json",
-        "interval": 1,
-        "exec": "echo '{\"class\": \"audio recording\"}'",
-        "exec-if": "pgrep ffmpeg",
-    },
+  "custom/separator": {
+    "format": "│",
+    "interval": "once",
+    "tooltip": false
+  },
 
+  "tray": {
+    "icon-size": 14,
+    "spacing": 8
+  },
+
+  "clock": {
+    "interval": 1,
+    "locale": "C",
+    "format": " {:%I:%M %p}",
+    "format-alt": " {:%a, %b %d}"
+  },
+
+  "cpu": {
+    "format": " {usage}%",
+    "tooltip": false,
+    "on-click": "alacritty -e btm"
+  },
+
+  "memory": {
+    "interval": 30,
+    "format": " {used:0.1f}G",
+    "on-click": "alacritty -e btm",
+    "max-length": 10,
+    "tooltip": false,
+    "warning": 70,
+    "critical": 90
+  },
+
+  "backlight": {
+    "format": " {percent}%",
+    "on-scroll-down": "brightnessctl -c backlight set 1%-",
+    "on-scroll-up": "brightnessctl -c backlight set +1%"
+  },
+
+  "battery": {
+    "states": { "good": 95, "warning": 30, "critical": 15 },
+    "format": "{icon} {capacity}%",
+    "format-charging": " {capacity}%",
+    "format-plugged": " {capacity}%",
+    "format-alt": "{icon} {time}",
+    "format-icons": ["","","","",""]
+  },
+
+  "network": {
+    "format-wifi": " {signalStrength}%",
+    "format-ethernet": "󰈁 {ipaddr}",
+    "format-linked": "󰌘",
+    "format-disconnected": "󰖪",
+    "format-alt": "{ifname}: {ipaddr}/{cidr}",
+    "tooltip-format": "{essid}: {ipaddr}"
+  },
+
+  "pulseaudio": {
+    "format": "{icon} {volume}% {format_source}",
+    "format-bluetooth": "{icon} {volume}% {format_source}",
+    "format-bluetooth-muted": " {format_source}",
+    "format-muted": " {format_source}",
+    "format-source": " {volume}%",
+    "format-source-muted": "",
+    "format-icons": {
+      "headphone": "",
+      "hands-free": "",
+      "headset": "🎧",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "default": ["","",""]
+    },
+    "on-click": "pavucontrol"
+  },
+
+  "hyprland/workspaces": {
+    "disable-scroll": true,
+    "all-outputs": true,
+    "format": "{icon}",
+    "format-icons": {
+      "default": "",
+      "active": "",
+      "urgent": ""
+    }
+  },
+
+  "hyprland/windows": {
+    "format": "{}",
+    "max-length": 60,
+    "separate-outputs": false,
+    "rewrite": {
+      "(.*) — (.*)": "$1"
+    },
+    "tooltip": false
+  },
+
+  "custom/energy-rate": {
+    "interval": 1,
+    "exec": "upower -e | rg BAT | xargs -I{} upower -i {} | rg -m1 'energy-rate' | awk '{print $2, $3}'"
+  },
+
+  "custom/recorder": {
+    "format": " Rec",
+    "format-disabled": " Off-air",
+    "return-type": "json",
+    "interval": 1,
+    "exec": "echo '{\"class\": \"recording\"}'",
+    "exec-if": "pgrep wf-recorder"
+  },
+
+  "custom/audiorec": {
+    "format": "♬ Rec",
+    "format-disabled": "♬ Off-air",
+    "return-type": "json",
+    "interval": 1,
+    "exec": "echo '{\"class\": \"audio recording\"}'",
+    "exec-if": "pgrep ffmpeg"
+  }
 }
+
