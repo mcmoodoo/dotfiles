@@ -1,8 +1,8 @@
 {
   "layer": "top",
   "position": "top",
-  "height": 36,
-  "margin": "6, 10, 0, 10",
+  "height": 32,
+  "margin": "2, 0, 0, 0",
 
   "modules-left": [
     "cpu",
@@ -18,9 +18,7 @@
 
   "modules-right": [
     "hyprland/windows",
-    "custom/separator",
     "group/recording",
-    "custom/separator",
     "pulseaudio",
     "custom/separator",
     "backlight",
@@ -30,7 +28,6 @@
     "custom/energy-rate",
     "custom/separator",
     "clock",
-    "custom/separator",
     "tray"
   ],
 
@@ -53,8 +50,8 @@
   "clock": {
     "interval": 1,
     "locale": "C",
-    "format": " {:%I:%M %p}",
-    "format-alt": " {:%a, %b %d}"
+    "format": "  {:%I:%M %p}",
+    "format-alt": "  {:%a, %b %d}"
   },
 
   "cpu": {
@@ -74,7 +71,7 @@
   },
 
   "backlight": {
-    "format": " {percent}%",
+    "format": "  {percent}%",
     "on-scroll-down": "brightnessctl -c backlight set 1%-",
     "on-scroll-up": "brightnessctl -c backlight set +1%"
   },

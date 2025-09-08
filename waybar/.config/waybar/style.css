@@ -9,8 +9,8 @@ window#waybar {
   background: rgba(22, 24, 28, 0.55);   /* translucent “glass” */
   border: 1px solid rgba(255, 255, 255, 0.06);
   color: #e6e6e6;
-  border-radius: 14px;
-  padding: 6px 10px;
+  border-radius: 4px;
+  padding: 2px 6px;
 
   /* Optional soft glow to fake depth in place of blur */
   box-shadow: 0 8px 24px rgba(0,0,0,0.25);
