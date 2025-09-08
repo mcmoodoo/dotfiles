@@ -39,7 +39,7 @@ window#waybar {
 
 /* Workspaces: pill style */
 #workspaces button {
-  padding: 4px 10px;
+  padding: 2px 6px;
   margin: 0 2px;
   border-radius: 999px;
   background: transparent;
@@ -47,8 +47,8 @@ window#waybar {
   border: 1px solid transparent;
 }
 #workspaces button.active {
-  background: rgba(255,255,255,0.10);
-  border-color: rgba(255,255,255,0.12);
+  background: transparent;
+  border-color: transparent;
   color: #ffffff;
 }
 #workspaces button.urgent {
@@ -56,9 +56,9 @@ window#waybar {
   border-color: rgba(255, 74, 74, 0.28);
   color: #fff;
 }
-#workspaces button:hover {
-  background: rgba(255,255,255,0.08);
-}
+/* #workspaces button:hover { */
+/*   background: rgba(255,255,255,0.08); */
+/* } */
 
 /* Window title fade if too long */
 #window {
