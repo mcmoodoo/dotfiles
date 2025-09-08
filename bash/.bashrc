@@ -40,7 +40,6 @@ source ~/.foundry/anvil_completions
 source ~/.foundry/cast_completions
 source ~/.foundry/forge_completions
 source ~/.config/gitleaks/completions
-source ~/.api_keys
 source ~/.config/gopass/completions
 source ~/.env
 source ~/.completions/*
