@@ -116,11 +116,9 @@
   "hyprland/workspaces": {
     "disable-scroll": true,
     "all-outputs": true,
-    "format": "{icon}",
-    "format-icons": {
-      "default": "",
-      "active": "",
-      "urgent": ""
+    "format": "{id}",
+    "persistent-workspaces": {
+      "*": 5
     }
   },
 
@@ -157,4 +155,3 @@
     "exec-if": "pgrep ffmpeg"
   }
 }
-
