@@ -134,7 +134,7 @@
 
   "custom/energy-rate": {
     "interval": 1,
-    "exec": "upower -e | rg BAT | xargs -I{} upower -i {} | rg -m1 'energy-rate' | awk '{print $2, $3}'"
+    "exec": "upower -e | rg battery_BAT1 | xargs -I{} upower -i {} | rg -m1 'energy-rate' | awk '{print $2, $3}'"
   },
 
   "custom/recorder": {
