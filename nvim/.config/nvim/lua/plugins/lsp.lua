@@ -251,15 +251,15 @@ return {
     })
     require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
-    require('lspconfig').lua_ls.setup {
-      settings = {
-        Lua = {
-          diagnostics = {
-            globals = { 'vim' },
-          },
-        },
-      },
-    }
+    -- require('lspconfig').lua_ls.setup {
+    --   settings = {
+    --     Lua = {
+    --       diagnostics = {
+    --         globals = { 'vim' },
+    --       },
+    --     },
+    --   },
+    -- }
 
     require('mason-lspconfig').setup {
       handlers = {
@@ -275,7 +275,8 @@ return {
             capabilities = server.capabilities,
           })
           
-          require('lspconfig')[server_name].setup(config)
+          vim.lsp.config[server_name].setup(config)
+
         end,
       },
     }

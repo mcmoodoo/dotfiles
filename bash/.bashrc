@@ -11,12 +11,13 @@ alias ll='eza -al'
 alias grep='grep --color=auto'
 PS1='[\u@\h \W]\$ '
 
-alias fzf_search='fzf --preview "bat --style=numbers --color=always --line-range :100 {}"'
+# alias fzf_search='fzf --preview "bat --style=numbers --color=always --line-range :100 {}"'
+eval "$(fzf --bash)"
 
 # bash-completion
 [[ $PS1 && -f /usr/share/bash-completion/bash_completion ]] && . /usr/share/bash-completion/bash_completion
-source /usr/share/fzf/completion.bash
-source /usr/share/fzf/key-bindings.bash
+# source /usr/share/fzf/completion.bash
+# source /usr/share/fzf/key-bindings.bash
 
 # powerline
 if [ -f /usr/share/powerline/bindings/bash/powerline.sh ]; then
@@ -24,14 +25,20 @@ if [ -f /usr/share/powerline/bindings/bash/powerline.sh ]; then
 fi
 
 eval "$(starship init bash)"
-. "$HOME/.cargo/env"
+# . "$HOME/.cargo/env"
 
 alias lg='lazygit'
+
+export NIXOS_OZONE_WL=1
+export MOZ_ENABLE_WAYLAND=1
+export QT_QPA_PLATFORM=wayland
+export XDG_SESSION_TYPE=wayland
 
 export PATH="$PATH:/home/mcmoodoo/.foundry/bin"
 export PATH="$PATH:/home/mcmoodoo/.local/bin"
 export PATH="$PATH:/home/mcmoodoo/go/bin"
-export PATH="$PATH:/home/mcmoodoo/.volta/bin"
+export PATH="$PATH:/home/mcmoodoo/.cargo/bin"
+
 alias fix_airpods='systemctl --user restart pipewire pipewire-pulse.service wireplumber.service'
 alias wrapped_shell='bwrap --ro-bind /usr /usr --ro-bind /bin /bin --ro-bind /lib /lib --ro-bind /lib64 /lib64 --dev /dev --proc /proc --tmpfs /tmp /bin/bash'
 
@@ -67,7 +74,7 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 
 complete -C "$(which aws_completer)" aws
 
-source /home/mcmoodoo/.config/broot/launcher/bash/br
+# source /home/mcmoodoo/.config/broot/launcher/bash/br
 
 alias z="zellij"
 alias tf="terraform"
