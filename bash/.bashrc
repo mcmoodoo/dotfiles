@@ -29,6 +29,8 @@ eval "$(starship init bash)"
 
 alias lg='lazygit'
 
+export EDITOR=nvim
+
 export NIXOS_OZONE_WL=1
 export MOZ_ENABLE_WAYLAND=1
 export QT_QPA_PLATFORM=wayland
