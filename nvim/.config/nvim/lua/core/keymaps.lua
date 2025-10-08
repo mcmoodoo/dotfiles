@@ -14,6 +14,8 @@ vim.keymap.set('n', '<leader>w', '<cmd> w <CR>', opts)
 -- save file without auto-formatting
 vim.keymap.set('n', '<leader>ww', '<cmd>noautocmd w <CR>', opts)
 
+vim.keymap.set('n', '<leader>f', vim.lsp.buf.format, { desc = 'Format buffer' })
+
 -- quit file
 vim.keymap.set('n', '<leader>q', '<cmd> q <CR>', opts)
 
