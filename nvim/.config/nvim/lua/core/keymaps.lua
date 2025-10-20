@@ -83,3 +83,12 @@ vim.keymap.set('n', '<A-k>', ':m .-2<CR>==', { noremap = true, silent = true }) 
 
 vim.keymap.set('v', '<A-j>', ":m '>+1<CR>gv=gv", opts)
 vim.keymap.set('v', '<A-k>', ":m '<-2<CR>gv=gv", opts)
+
+-- grug-far keymaps
+vim.keymap.set('n', '<leader>gr', function()
+  require('grug-far').open()
+end, { desc = 'Search and Replace (project-wide)' })
+
+vim.keymap.set('n', '<leader>gw', function()
+  require('grug-far').open({ search = vim.fn.expand('<cword>') })
+end, { desc = 'Search word under cursor' })
