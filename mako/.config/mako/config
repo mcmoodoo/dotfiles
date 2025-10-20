@@ -1,0 +1,8 @@
+# timeout in milliseconds
+default-timeout=5000
+
+# position on screen
+anchor=top-right
+
+# maximum number of visible notifications
+max-visible=5
