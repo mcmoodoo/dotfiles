@@ -9,6 +9,14 @@ alias ls='ls --color=auto'
 alias l='eza -l'
 alias ll='eza -al'
 alias grep='grep --color=auto'
+
+alias z="zellij"
+alias tf="terraform"
+alias y='yazi'
+
+alias find_repos_with_remotes='~/.my-scripts/scan_repos_with_remotes.py'
+alias fix_touchpod='sudo modprobe -r i2c_hid_acpi && sudo modprobe i2c_hid_acpi'
+
 PS1='[\u@\h \W]\$ '
 
 # alias fzf_search='fzf --preview "bat --style=numbers --color=always --line-range :100 {}"'
@@ -40,6 +48,7 @@ export PATH="$PATH:/home/mcmoodoo/.foundry/bin"
 export PATH="$PATH:/home/mcmoodoo/.local/bin"
 export PATH="$PATH:/home/mcmoodoo/go/bin"
 export PATH="$PATH:/home/mcmoodoo/.cargo/bin"
+export PATH="$PATH:/home/mcmoodoo/.yarn/bin"
 
 alias fix_airpods='systemctl --user restart pipewire pipewire-pulse.service wireplumber.service'
 alias wrapped_shell='bwrap --ro-bind /usr /usr --ro-bind /bin /bin --ro-bind /lib /lib --ro-bind /lib64 /lib64 --dev /dev --proc /proc --tmpfs /tmp /bin/bash'
@@ -52,6 +61,7 @@ source ~/.completions/cast_completions
 source ~/.completions/forge_completions
 source ~/.completions/gitleaks_completions
 source ~/.completions/restish-completions
+source ~/.completions/tenderly-completions
 source ~/.completions/pnpm-completions
 source ~/.completions/bun-completions
 source ~/.completions/zellij-completions
@@ -78,8 +88,6 @@ complete -C "$(which aws_completer)" aws
 
 # source /home/mcmoodoo/.config/broot/launcher/bash/br
 
-alias z="zellij"
-alias tf="terraform"
+export NARGO_HOME="/home/mcmoodoo/.nargo"
 
-alias find_repos_with_remotes='~/.my-scripts/scan_repos_with_remotes.py'
-alias fix_touchpod='sudo modprobe -r i2c_hid_acpi && sudo modprobe i2c_hid_acpi'
+export PATH="$PATH:$NARGO_HOME/bin"
