@@ -56,6 +56,7 @@ alias wrapped_shell='bwrap --ro-bind /usr /usr --ro-bind /bin /bin --ro-bind /li
 # Completions
 source ~/.env
 source ~/.completions/*
+source ~/.completions/mimic-completions
 source ~/.completions/anvil_completions
 source ~/.completions/cast_completions
 source ~/.completions/forge_completions

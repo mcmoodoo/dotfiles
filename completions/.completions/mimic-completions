@@ -1,0 +1,47 @@
+# mimic completion script for bash
+# Install by running:
+#   mimic completions --shell bash >> /home/mcmoodoo/.bashrc
+# Then reload your shell:
+#   source /home/mcmoodoo/.bashrc
+
+_mimic_completion() {
+  local cur prev commands
+  COMPREPLY=()
+  cur="${COMP_WORDS[COMP_CWORD]}"
+  prev="${COMP_WORDS[COMP_CWORD-1]}"
+  commands="build codegen compile completions deploy init test"
+  
+  if [[ $COMP_CWORD -eq 1 ]]; then
+    COMPREPLY=( $(compgen -W "$commands" -- "$cur") )
+    return 0
+  fi
+  
+  case "$prev" in
+    build)
+      COMPREPLY=( $(compgen -W "-m --manifest -t --task -o --output -y --types -c --clean" -- "$cur") )
+      ;;
+    codegen)
+      COMPREPLY=( $(compgen -W "-m --manifest -o --output -c --clean" -- "$cur") )
+      ;;
+    compile)
+      COMPREPLY=( $(compgen -W "-t --task -m --manifest -o --output" -- "$cur") )
+      ;;
+    completions)
+      COMPREPLY=( $(compgen -W "-s --shell" -- "$cur") )
+      ;;
+    deploy)
+      COMPREPLY=( $(compgen -W "-k --key -i --input -o --output -u --url --skip-compile" -- "$cur") )
+      ;;
+    init)
+      COMPREPLY=( $(compgen -W "-d --directory -f --force" -- "$cur") )
+      ;;
+    test)
+      COMPREPLY=( $(compgen -W "-d --directory --skipCompile" -- "$cur") )
+      ;;
+    *)
+      COMPREPLY=( $(compgen -W "$commands" -- "$cur") )
+      ;;
+  esac
+}
+
+complete -F _mimic_completion mimic
