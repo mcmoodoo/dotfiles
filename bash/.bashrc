@@ -35,6 +35,16 @@ fi
 eval "$(starship init bash)"
 # . "$HOME/.cargo/env"
 
+timer() {
+    local seconds=0
+    while true; do
+        clear
+        echo "Elapsed: $seconds seconds"
+        sleep 1
+        ((seconds++))
+    done
+}
+
 alias lg='lazygit'
 
 export EDITOR=nvim
