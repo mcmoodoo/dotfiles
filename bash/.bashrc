@@ -80,6 +80,7 @@ source ~/.completions/sqlx-completions
 source ~/.completions/volta-completions
 source ~/.completions/just-completions
 source ~/.completions/runpod-completions
+source ~/.completions/dpm-completions
 
 # ENV
 export HYPRSHOT_DIR="/home/mcmoodoo/Pictures"
@@ -102,3 +103,6 @@ complete -C "$(which aws_completer)" aws
 export NARGO_HOME="/home/mcmoodoo/.nargo"
 
 export PATH="$PATH:$NARGO_HOME/bin"
+
+GRAPH_AC_BASH_SETUP_PATH=/home/mcmoodoo/.cache/@graphprotocol/graph-cli/autocomplete/bash_setup && test -f $GRAPH_AC_BASH_SETUP_PATH && source $GRAPH_AC_BASH_SETUP_PATH # graph autocomplete setupeval
+SQD_AC_BASH_SETUP_PATH=/home/mcmoodoo/.cache/@subsquid/cli/autocomplete/bash_setup && test -f $SQD_AC_BASH_SETUP_PATH && source $SQD_AC_BASH_SETUP_PATH
