@@ -49,6 +49,14 @@ sift_secrets() {
     tee >(trufflehog stdin) >(gitleaks stdin) | cat >/dev/null
 }
 
+wifi_pass() {
+    if [ -z "$1" ]; then
+        echo "Usage: wifi_pass <wifi-name>"
+        return 1
+    fi
+    nmcli -s -g 802-11-wireless-security.psk connection show "$1"
+}
+
 alias lg='lazygit'
 
 export EDITOR=nvim
