@@ -45,6 +45,10 @@ timer() {
     done
 }
 
+sift_secrets() {
+    tee >(trufflehog stdin) >(gitleaks stdin) | cat >/dev/null
+}
+
 alias lg='lazygit'
 
 export EDITOR=nvim
@@ -81,6 +85,7 @@ source ~/.completions/volta-completions
 source ~/.completions/just-completions
 source ~/.completions/runpod-completions
 source ~/.completions/dpm-completions
+source ~/.completions/kubectl-completions
 
 # ENV
 export HYPRSHOT_DIR="/home/mcmoodoo/Pictures"
