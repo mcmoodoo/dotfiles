@@ -14,7 +14,6 @@ alias z="zellij"
 alias tf="terraform"
 alias y='yazi'
 
-alias find_repos_with_remotes='~/.my-scripts/scan_repos_with_remotes.py'
 alias fix_touchpod='sudo modprobe -r i2c_hid_acpi && sudo modprobe i2c_hid_acpi'
 
 PS1='[\u@\h \W]\$ '
