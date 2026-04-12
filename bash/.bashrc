@@ -67,7 +67,6 @@ export XDG_SESSION_TYPE=wayland
 
 export PATH="$PATH:/home/mcmoodoo/.foundry/bin"
 export PATH="$PATH:/home/mcmoodoo/.local/bin"
-export PATH="$PATH:/home/mcmoodoo/go/bin"
 export PATH="$PATH:/home/mcmoodoo/.cargo/bin"
 export PATH="$PATH:/home/mcmoodoo/.yarn/bin"
 
