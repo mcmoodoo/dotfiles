@@ -44,8 +44,3 @@ style = "Block"  # Cursor style: Block, Underline, Beam
 [scrolling]
 history = 10000  # Lines of scrollback history
 multiplier = 3  # Speed of scrolling
-
-[[keyboard.bindings]]
-key = "Return"
-mods = "Shift"
-chars = "\u001B\r"
