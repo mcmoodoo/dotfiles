@@ -1,5 +1,18 @@
 vim.wo.number = true                                 -- Make line numbers default (default: false)
 --vim.o.relativenumber = true -- Set relative numbered lines (default: false)
+if vim.env.SSH_TTY then
+  vim.g.clipboard = {
+    name = 'OSC 52',
+    copy = {
+      ['+'] = require('vim.ui.clipboard.osc52').copy('+'),
+      ['*'] = require('vim.ui.clipboard.osc52').copy('*'),
+    },
+    paste = {
+      ['+'] = require('vim.ui.clipboard.osc52').paste('+'),
+      ['*'] = require('vim.ui.clipboard.osc52').paste('*'),
+    },
+  }
+end
 vim.o.clipboard = 'unnamedplus'                      -- Sync clipboard between OS and Neovim. (default: '')
 vim.o.wrap = true                                    -- Display lines as one long line (default: true)
 vim.o.linebreak = true                               -- Companion to wrap, don't split words (default: false)
