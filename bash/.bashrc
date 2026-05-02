@@ -15,7 +15,7 @@ alias tf="terraform"
 alias y='yazi'
 
 alias fix_touchpad='sudo modprobe -r i2c_hid_acpi && sudo modprobe i2c_hid_acpi'
-alias claude-wild='claude --dangerously-skip-permission'
+alias claude-wild='claude --dangerously-skip-permissions'
 
 PS1='[\u@\h \W]\$ '
 
