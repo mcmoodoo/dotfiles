@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Name=Alacritty
+GenericName=Terminal
+Comment=A fast, cross-platform, OpenGL terminal emulator
+Exec=/home/reed/.cargo/bin/alacritty
+TryExec=/home/reed/.cargo/bin/alacritty
+Icon=utilities-terminal
+Terminal=false
+Categories=System;TerminalEmulator;
+StartupNotify=true
+StartupWMClass=Alacritty

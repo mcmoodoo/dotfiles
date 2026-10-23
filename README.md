@@ -82,8 +82,7 @@ vi editing mode. Open a new terminal or run `exec bash` to load changes.
 Only Bun, pnpm, Zellij, Gitleaks, and Just completions are linked. The Stow ignore
 files exclude other completions and the old hardware helper scripts. Do not
 stow the Hyprland, lock-screen, wallpaper-daemon, Waybar, Wofi, Mako, or screen
-layout packages on this COSMIC setup. Terminal-emulator configurations are
-also left unlinked.
+layout packages on this COSMIC setup. Alacritty is linked separately below.
 
 Neovim retains Lazy's plugin lockfile. Use `:Lazy restore` to restore those
 plugin revisions. Mason owns editor-specific servers and formatters, with
@@ -101,3 +100,26 @@ Telescope's native fuzzy matcher, completion/snippets, Lua/TypeScript/Python
 language-server attachment, TypeScript parsing, Python formatting with Ruff,
 and JSON formatting with Prettier. The locked `nvim-colorizer.lua` plugin emits
 a non-blocking `vim.tbl_flatten` deprecation warning on Neovim 0.12.
+
+
+### Alacritty on COSMIC
+
+This machine uses the Cargo-installed terminal at `$HOME/.cargo/bin/alacritty`
+(`cargo install alacritty`). Its editable
+configuration lives in `alacritty/.config/alacritty/alacritty.toml`; it uses
+JetBrainsMono Nerd Font Mono, the existing Nord colors, and 0.88 opacity.
+Window decorations and blur are disabled for this COSMIC setup.
+The old `.bak` file is excluded from Stow.
+
+After installation and a successful launch, link the terminal and shortcut:
+
+```bash
+stow --dir="$HOME/.dotfiles" --target="$HOME" --no-folding alacritty cosmic-shortcuts
+```
+
+The `cosmic-shortcuts` package overrides only the `Terminal` system action with
+`/home/reed/.cargo/bin/alacritty`, so COSMIC's existing Super+T binding launches
+the Cargo version. The desktop launcher uses the same absolute path; adjust
+both files when setting up a different home directory. Other system
+actions inherit their native defaults. COSMIC Terminal remains installed and
+can be launched with `cosmic-term`.

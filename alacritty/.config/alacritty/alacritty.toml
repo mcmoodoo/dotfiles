@@ -1,16 +1,16 @@
 [window]
 dimensions = { columns = 120, lines = 30 }  # Window dimensions (columns x lines)
 padding = { x = 5, y = 5 }  # Padding around the text
-decorations = "full"  # Window decorations: full, none, transparent
+decorations = "None"  # Window decorations: full, none, transparent
 startup_mode = "Windowed"  # Startup mode: Maximized, Fullscreen, Windowed
 opacity = 0.88
-blur = true
+blur = false  # COSMIC: keep transparency without relying on KDE blur support.
 
 [font]
 # Font family and style
-normal = { family = "HackNerdFont", style = "Regular" }  # Replace with your preferred Nerd Font
-bold = { family = "HackNerdFont", style = "Bold" }
-italic = { family = "HackNerdFont", style = "Italic" }
+normal = { family = "JetBrainsMono Nerd Font Mono", style = "Regular" }
+bold = { family = "JetBrainsMono Nerd Font Mono", style = "Bold" }
+italic = { family = "JetBrainsMono Nerd Font Mono", style = "Italic" }
 size = 12.0  # Font size
 
 [colors.primary]
