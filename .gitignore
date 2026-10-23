@@ -1,2 +1,4 @@
 /gh/.*\/*/hosts.yml
 **/.codex
+
+/gh/.config/gh/hosts.yml

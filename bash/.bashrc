@@ -1,120 +1,202 @@
-#
-# ~/.bashrc
-#
+# ~/.bashrc: executed by bash(1) for non-login shells.
+# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
+# for examples
 
 # If not running interactively, don't do anything
-[[ $- != *i* ]] && return
-#
-alias ls='ls --color=auto'
-alias l='eza -l'
-alias ll='eza -al'
-alias grep='grep --color=auto'
+case $- in
+    *i*) ;;
+      *) return;;
+esac
 
-alias z="zellij"
-alias tf="terraform"
-alias y='yazi'
+# don't put duplicate lines or lines starting with space in the history.
+# See bash(1) for more options
+HISTCONTROL=ignoreboth
 
-alias fix_touchpad='sudo modprobe -r i2c_hid_acpi && sudo modprobe i2c_hid_acpi'
-alias claude-wild='claude --dangerously-skip-permissions'
+# append to the history file, don't overwrite it
+shopt -s histappend
 
-PS1='[\u@\h \W]\$ '
+# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+HISTSIZE=1000
+HISTFILESIZE=2000
 
-# alias fzf_search='fzf --preview "bat --style=numbers --color=always --line-range :100 {}"'
-eval "$(fzf --bash)"
+# check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS.
+shopt -s checkwinsize
 
-# bash-completion
-[[ $PS1 && -f /usr/share/bash-completion/bash_completion ]] && . /usr/share/bash-completion/bash_completion
-# source /usr/share/fzf/completion.bash
-# source /usr/share/fzf/key-bindings.bash
+# If set, the pattern "**" used in a pathname expansion context will
+# match all files and zero or more directories and subdirectories.
+#shopt -s globstar
 
-# powerline
-if [ -f /usr/share/powerline/bindings/bash/powerline.sh ]; then
-    source /usr/share/powerline/bindings/bash/powerline.sh
+# make less more friendly for non-text input files, see lesspipe(1)
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+
+# set variable identifying the chroot you work in (used in the prompt below)
+if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
+    debian_chroot=$(cat /etc/debian_chroot)
 fi
 
-eval "$(starship init bash)"
-# . "$HOME/.cargo/env"
+# set a fancy prompt (non-color, unless we know we "want" color)
+case "$TERM" in
+    xterm-color|*-256color) color_prompt=yes;;
+esac
+
+# uncomment for a colored prompt, if the terminal has the capability; turned
+# off by default to not distract the user: the focus in a terminal window
+# should be on the output of commands, not on the prompt
+#force_color_prompt=yes
+
+if [ -n "$force_color_prompt" ]; then
+    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
+	# We have color support; assume it's compliant with Ecma-48
+	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+	# a case would tend to support setf rather than setaf.)
+	color_prompt=yes
+    else
+	color_prompt=
+    fi
+fi
+
+if [ "$color_prompt" = yes ]; then
+    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+else
+    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+fi
+unset color_prompt force_color_prompt
+
+# If this is an xterm set the title to user@host:dir
+case "$TERM" in
+xterm*|rxvt*)
+    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+    ;;
+*)
+    ;;
+esac
+
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
+    #alias dir='dir --color=auto'
+    #alias vdir='vdir --color=auto'
+
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
+
+# colored GCC warnings and errors
+#export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+
+# Codex is installed through Bun; preserve its executable directory.
+export BUN_INSTALL="$HOME/.bun"
+case ":$PATH:" in
+    *":$BUN_INSTALL/bin:"*) ;;
+    *) export PATH="$BUN_INSTALL/bin:$PATH" ;;
+esac
+
+# Prefer Cargo-installed applications, including Alacritty.
+case ":$PATH:" in
+    *":$HOME/.cargo/bin:"*) ;;
+    *) export PATH="$HOME/.cargo/bin:$PATH" ;;
+esac
+
+# some more ls aliases
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+
+# Add an "alert" alias for long running commands.  Use like so:
+#   sleep 10; alert
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+
+# Alias definitions.
+# You may want to put all your additions into a separate file like
+# ~/.bash_aliases, instead of adding them here directly.
+# See /usr/share/doc/bash-doc/examples in the bash-doc package.
+
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
+
+# enable programmable completion features (you don't need to enable
+# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
+# sources /etc/bash.bashrc).
+if ! shopt -oq posix; then
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+  fi
+fi
+
+# Preserve the Home Manager session environment on Pop!_OS.
+if [ -r "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh" ]; then
+    . "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
+fi
+if [ -t 0 ]; then
+    export GPG_TTY="$(tty)"
+fi
+
+# Personal aliases from the dotfiles repository.
+alias l='eza -l'
+alias ll='eza -al'
+alias z='zellij'
+alias y='yazi'
+alias lg='lazygit'
+export EDITOR=nvim
+set -o vi
+
+if command -v fzf >/dev/null 2>&1; then
+    eval "$(fzf --bash)"
+fi
+if command -v zoxide >/dev/null 2>&1; then
+    # Keep `z` for Zellij, as in the original dotfiles.
+    eval "$(zoxide init bash --cmd j)"
+fi
+if command -v starship >/dev/null 2>&1; then
+    eval "$(starship init bash)"
+fi
+
+# Load personal completions only for tools installed on this machine.
+for _dotfiles_tool in bun pnpm zellij gitleaks just; do
+    if command -v "$_dotfiles_tool" >/dev/null 2>&1; then
+        _dotfiles_completion="$HOME/.completions/${_dotfiles_tool}-completions"
+        case "$_dotfiles_tool" in
+            gitleaks) _dotfiles_completion="$HOME/.completions/gitleaks_completions" ;;
+        esac
+        if [ -r "$_dotfiles_completion" ]; then
+            . "$_dotfiles_completion"
+        fi
+    fi
+done
+unset _dotfiles_tool _dotfiles_completion
 
 timer() {
     local seconds=0
     while true; do
         clear
-        echo "Elapsed: $seconds seconds"
+        printf 'Elapsed: %s seconds\n' "$seconds"
         sleep 1
         ((seconds++))
     done
 }
 
 sift_secrets() {
-    tee >(trufflehog stdin) >(gitleaks stdin) | cat >/dev/null
+    if ! command -v trufflehog >/dev/null 2>&1 || ! command -v gitleaks >/dev/null 2>&1; then
+        printf 'sift_secrets requires trufflehog and gitleaks.\n' >&2
+        return 1
+    fi
+    tee >(trufflehog stdin) >(gitleaks stdin) >/dev/null
 }
 
 wifi_pass() {
-    if [ -z "$1" ]; then
-        echo "Usage: wifi_pass <wifi-name>"
+    if [ -z "${1:-}" ]; then
+        printf 'Usage: wifi_pass <wifi-name>\n' >&2
+        return 1
+    fi
+    if ! command -v nmcli >/dev/null 2>&1; then
+        printf 'NetworkManager CLI (nmcli) is not installed.\n' >&2
         return 1
     fi
     nmcli -s -g 802-11-wireless-security.psk connection show "$1"
 }
-
-alias lg='lazygit'
-
-export EDITOR=nvim
-
-export NIXOS_OZONE_WL=1
-export MOZ_ENABLE_WAYLAND=1
-export QT_QPA_PLATFORM=wayland
-export XDG_SESSION_TYPE=wayland
-
-export PATH="$PATH:/home/mcmoodoo/.foundry/bin"
-export PATH="$PATH:/home/mcmoodoo/.local/bin"
-export PATH="$PATH:/home/mcmoodoo/.cargo/bin"
-export PATH="$PATH:/home/mcmoodoo/.yarn/bin"
-
-alias fix_airpods='systemctl --user restart pipewire pipewire-pulse.service wireplumber.service'
-alias wrapped_shell='bwrap --ro-bind /usr /usr --ro-bind /bin /bin --ro-bind /lib /lib --ro-bind /lib64 /lib64 --dev /dev --proc /proc --tmpfs /tmp /bin/bash'
-
-# Completions
-source ~/.env
-source ~/.completions/*
-source ~/.completions/mimic-completions
-source ~/.completions/anvil_completions
-source ~/.completions/cast_completions
-source ~/.completions/forge_completions
-source ~/.completions/gitleaks_completions
-source ~/.completions/restish-completions
-source ~/.completions/tenderly-completions
-source ~/.completions/pnpm-completions
-source ~/.completions/bun-completions
-source ~/.completions/zellij-completions
-source ~/.completions/sqlx-completions
-source ~/.completions/volta-completions
-source ~/.completions/just-completions
-source ~/.completions/runpod-completions
-source ~/.completions/dpm-completions
-source ~/.completions/kubectl-completions
-
-# ENV
-export HYPRSHOT_DIR="/home/mcmoodoo/Pictures"
-export XDG_PICTURES_DIR="/home/mcmoodoo/Pictures"
-
-set -o vi
-
-export PATH="$PATH:/home/mcmoodoo/.local/bin"
-export PATH="$PATH:/home/mcmoodoo/.bin"
-export PATH="$PATH:/home/mcmoodoo/.bin/byn"
-
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
-
-complete -C "$(which aws_completer)" aws
-
-# source /home/mcmoodoo/.config/broot/launcher/bash/br
-
-export NARGO_HOME="/home/mcmoodoo/.nargo"
-
-export PATH="$PATH:$NARGO_HOME/bin"
-
-GRAPH_AC_BASH_SETUP_PATH=/home/mcmoodoo/.cache/@graphprotocol/graph-cli/autocomplete/bash_setup && test -f $GRAPH_AC_BASH_SETUP_PATH && source $GRAPH_AC_BASH_SETUP_PATH # graph autocomplete setupeval
-SQD_AC_BASH_SETUP_PATH=/home/mcmoodoo/.cache/@subsquid/cli/autocomplete/bash_setup && test -f $SQD_AC_BASH_SETUP_PATH && source $SQD_AC_BASH_SETUP_PATH
