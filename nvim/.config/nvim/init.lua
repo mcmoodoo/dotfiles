@@ -11,6 +11,17 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
   if vim.v.shell_error ~= 0 then
     error('Error cloning lazy.nvim:\n' .. out)
   end
+  -- Honor the plugin manager revision already recorded in the lockfile.
+  local lockfile = vim.fn.stdpath('config') .. '/lazy-lock.json'
+  if vim.fn.filereadable(lockfile) == 1 then
+    local lock = vim.json.decode(table.concat(vim.fn.readfile(lockfile), '\n'))
+    if lock['lazy.nvim'] then
+      local checkout = vim.fn.system { 'git', '-C', lazypath, 'checkout', lock['lazy.nvim'].commit }
+      if vim.v.shell_error ~= 0 then
+        error('Error checking out locked lazy.nvim revision:\n' .. checkout)
+      end
+    end
+  end
 end
 vim.opt.rtp:prepend(lazypath)
 

@@ -178,6 +178,8 @@ return {
         end,
       },
       pylsp = {
+        -- uv uses the system Python without requiring Pop!_OS's optional ensurepip package.
+        cmd = { 'uv', 'tool', 'run', '--no-managed-python', '--python', 'python3', '--from', 'python-lsp-server', 'pylsp' },
         settings = {
           pylsp = {
             plugins = {
@@ -205,7 +207,6 @@ return {
       tailwindcss = {},
       dockerls = {},
       sqlls = {},
-      terraformls = {},
       jsonls = {},
       yamlls = {},
 
@@ -235,50 +236,26 @@ return {
       },
     }
 
-    -- Ensure the servers and tools above are installed
-    --  To check the current status of installed tools and/or manually install
-    --  other tools, you can run
-    --    :Mason
-    --
-    --  You can press `g?` for help in this menu.
+    -- Mason owns editor tools; Home Manager continues to own general CLI tools.
     require('mason').setup()
 
-    -- You can add other tools here that you want Mason to install
-    -- for you, so that they are available from within Neovim.
-    local ensure_installed = vim.tbl_keys(servers or {})
-    vim.list_extend(ensure_installed, {
-      'stylua', -- Used to format Lua code
-    })
-    require('mason-tool-installer').setup { ensure_installed = ensure_installed }
-
-    -- require('lspconfig').lua_ls.setup {
-    --   settings = {
-    --     Lua = {
-    --       diagnostics = {
-    --         globals = { 'vim' },
-    --       },
-    --     },
-    --   },
-    -- }
-
-    require('mason-lspconfig').setup {
-      handlers = {
-        function(server_name)
-          local server = servers[server_name] or {}
-          -- This handles overriding only values explicitly passed
-          -- by the server configuration above. Useful when disabling
-          -- certain features of an LSP (for example, turning off formatting for tsserver)
-          server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-          
-          -- Preserve custom on_attach if defined
-          local config = vim.tbl_deep_extend('force', server, {
-            capabilities = server.capabilities,
-          })
-          
-          vim.lsp.config[server_name].setup(config)
-
-        end,
-      },
+    local ensure_installed = vim.tbl_keys(servers)
+    -- pylsp is supplied through uv because system Python has no ensurepip module.
+    ensure_installed = vim.tbl_filter(function(name) return name ~= 'pylsp' end, ensure_installed)
+    vim.list_extend(ensure_installed, { 'stylua', 'prettier', 'eslint_d', 'shfmt', 'checkmake' })
+    require('mason-tool-installer').setup {
+      ensure_installed = ensure_installed,
+      auto_update = false,
     }
+
+    -- Neovim 0.11+ configures servers directly; Mason v2 no longer uses handlers.
+    for name, server in pairs(servers) do
+      server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
+      vim.lsp.config(name, server)
+    end
+    require('mason-lspconfig').setup {
+      automatic_enable = vim.tbl_keys(servers),
+    }
+    vim.lsp.enable('pylsp')
   end,
 }

@@ -85,5 +85,19 @@ stow the Hyprland, lock-screen, wallpaper-daemon, Waybar, Wofi, Mako, or screen
 layout packages on this COSMIC setup. Terminal-emulator configurations are
 also left unlinked.
 
+Neovim retains Lazy's plugin lockfile. Use `:Lazy restore` to restore those
+plugin revisions. Mason owns editor-specific servers and formatters, with
+installation centralized in `lua/plugins/lsp.lua`; `:MasonToolsInstallSync`
+installs the configured tools. Python's `pylsp` runs through `uv tool run`
+using the system Python, which avoids needing an extra Python installation or
+APT's optional ensurepip package. Terraform integration is disabled. Editor
+tool downloads are separate from the Home Manager flake lockfile.
+
 GitHub CLI preferences are linked as a single file. Authentication files remain
 local and are ignored by Git. Home Manager continues to manage Git identity.
+
+Validated locally: fresh Bash startup, selected completions, Neovim startup,
+Telescope's native fuzzy matcher, completion/snippets, Lua/TypeScript/Python
+language-server attachment, TypeScript parsing, Python formatting with Ruff,
+and JSON formatting with Prettier. The locked `nvim-colorizer.lua` plugin emits
+a non-blocking `vim.tbl_flatten` deprecation warning on Neovim 0.12.
