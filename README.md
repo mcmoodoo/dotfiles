@@ -123,3 +123,31 @@ the Cargo version. The desktop launcher uses the same absolute path; adjust
 both files when setting up a different home directory. Other system
 actions inherit their native defaults. COSMIC Terminal remains installed and
 can be launched with `cosmic-term`.
+
+
+### Ghostty on COSMIC
+
+Ghostty's editable configuration lives in `ghostty/.config/ghostty/config`.
+It uses the bundled Catppuccin Mocha theme, JetBrainsMono Nerd Font Mono at
+size 12, 0.91 background opacity, and a hidden GTK titlebar.
+
+After installing Ghostty, link its configuration:
+
+```bash
+stow --dir="$HOME/.dotfiles" --target="$HOME" --no-folding ghostty
+ghostty +validate-config
+```
+
+Restart Ghostty to load the settings. The configuration was validated with
+Ghostty 1.3.1 and visually checked on COSMIC. This does not change the Super+T
+shortcut documented above.
+
+Chafa 1.14.0 needs an explicit graphics format for sharp image output in
+Ghostty. Run this directly in Ghostty, outside a terminal multiplexer:
+
+```bash
+chafa --format=kitty /path/to/image.png
+```
+
+Keep this option specific to Ghostty rather than setting a global Chafa alias,
+since other terminals may require a different graphics format.
